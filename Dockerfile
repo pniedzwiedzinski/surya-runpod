@@ -6,13 +6,6 @@ FROM runpod/base:0.4.0-cuda11.8.0
 # Please refer to the base image's Dockerfile for more information before adding additional dependencies.
 # IMPORTANT: The base image overrides the default huggingface cache location.
 
-
-# --- Optional: System dependencies ---
-COPY builder/setup.sh /setup.sh
-RUN /bin/bash /setup.sh && \
-    rm /setup.sh
-
-
 # Python dependencies
 COPY builder/requirements.txt /requirements.txt
 RUN python3.11 -m pip install --upgrade pip && \
@@ -21,6 +14,11 @@ RUN python3.11 -m pip install --upgrade pip && \
 
 # NOTE: The base image comes with multiple Python versions pre-installed.
 #       It is reccommended to specify the version of Python when running your code.
+
+# --- Optional: System dependencies ---
+COPY builder/setup.sh /setup.sh
+RUN /bin/bash /setup.sh && \
+    rm /setup.sh
 
 
 # Add src files (Worker Template)
