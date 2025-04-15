@@ -12,7 +12,7 @@ from surya.recognition.languages import replace_lang_with_code
 from surya.recognition import RecognitionPredictor
 
 # Global configuration
-DEBUG_MODE = False
+DEBUG_MODE = True
 
 def read_image(file_path: str) -> Image.Image:
     """
@@ -35,10 +35,10 @@ def load_images(files: List[str]) -> Tuple[List[Image.Image], List[str]]:
     """
     images = []
     names = []
-    for file in files:
+    for idx, file in enumerate(files):
         img = read_image(file)
         images.append(img)
-        names.append(file.filename or f"image_{len(names)}")
+        names.append(f"image_{idx}")
     return images, names
 
 def get_languages(num_images: int) -> List[List[str]]:
